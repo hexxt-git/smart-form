@@ -12,7 +12,7 @@
 	let inputs: Input[] = [
 		{
 			name: 'name',
-			description: 'Enter your name here',
+			description: 'Enter your full name here',
 			condition: 'user must enter a viable name',
 			value: '',
 			response: '',
@@ -56,6 +56,7 @@
 			value: '',
 			response: '',
 			validate: (value: string) => {
+                // probably shouldnt let the ai see this
 				return value.length > 8;
 			},
 			required: true,
@@ -68,6 +69,7 @@
 			value: '',
 			response: '',
 			validate: (value: string) => {
+                // check if the password is the same as the previous password
 				return value.length > 8;
 			},
 			required: true,
@@ -132,6 +134,7 @@
 				type="text"
 				bind:value={input.value}
 				placeholder={input.name}
+                on:input={()=>input.response = ''}
 			/>
 			<!--on:input={()=>proccess(input)} /> disabled for performance -->
 			<div class="response">
@@ -147,12 +150,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: solid 1px white;
-		padding: 1rem;
-		margin: 1rem auto;
-		width: 80%;
-		border-radius: 20px;
 		gap: 10px;
+        margin-top: 50px;
 	}
 	.input {
 		background-color: #f0f0f0;
@@ -160,17 +159,33 @@
 		min-width: 50%;
 		width: 500px;
 		max-width: 75%;
+        border-radius: 5px;
 	}
 	.invalid .response{
         color: red;
 	}
 	input {
+        display: block;
 		border: none;
 		background: transparent;
-		border-bottom: solid 1px black;
+		border-bottom: dashed 1px #888;
 		width: 100%;
+        padding: 5px;
+        font-size: inherit;
+        box-sizing: border-box;
 	}
 	input:focus {
 		outline: none;
 	}
+    .response{
+        padding: 5px;
+    }
+    button {
+        padding: 10px;
+        border: none;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 25px;
+    }
 </style>
